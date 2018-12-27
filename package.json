@@ -1,0 +1,17 @@
+{
+  "name": "holidaysapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "aws lambda invoke --function-name holidaysApi --invocation-type RequestResponse out.json | grep -c 'statusCode\":200' out.json | exit $?",
+    "deploy": "sh deploy.sh"
+  },
+  "author": "Vasanth Vaidyanathan",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "moment": "^2.23.0"
+  }
+}
