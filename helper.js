@@ -3,10 +3,10 @@ const moment = require('moment');
 
 function extractHolidaysFromHTML (html, year) {
   const $ = cheerio.load(html);
-  const vacancyRows = $('.article table tbody tr');
+  const holidayRows = $('.article table tbody tr');
 
   let holidays = [];
-  vacancyRows.each((i, el) => {
+  holidayRows.each((i, el) => {
     // Extract information from each row of the jobs table
     let info = {};
     let dateString = $(el).children().first().text().trim() + " " + year

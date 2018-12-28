@@ -14,7 +14,6 @@ exports.holidays = async (event) => {
   }
   
   try {
-
     // default to current year
     let year = moment().year();
 
@@ -30,6 +29,7 @@ exports.holidays = async (event) => {
   
     const url = 'https://www.timeanddate.com/holidays/india/' + year
     const holidaysHTML = await axios(url, {'headers': {'accept-language': 'en-GB,en-US'}});
+    // extract holidays JSON from HTML
     const holidays = extractHolidaysFromHTML(holidaysHTML.data, year)
     response[STATUS_CODE] = (holidays.length == 0) ? 204 : 200
     response["body"] = JSON.stringify(holidays)
