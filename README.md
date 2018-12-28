@@ -1,5 +1,4 @@
 # Holidays Lambda API
-====
 
 Holidays API returns a list of classified Holidays in India. This is a Playground to dabble with AWS Lambda and API Gateway.
 
