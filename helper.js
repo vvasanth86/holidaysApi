@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const moment = require('moment');
 
-function extractHolidaysFromHTML (html) {
+function extractHolidaysFromHTML (html, year) {
   const $ = cheerio.load(html);
   const vacancyRows = $('.article table tbody tr');
 
@@ -9,7 +9,8 @@ function extractHolidaysFromHTML (html) {
   vacancyRows.each((i, el) => {
     // Extract information from each row of the jobs table
     let info = {};
-    let date = moment($(el).children().first().text().trim(), 'MMM D').toISOString();
+    let dateString = $(el).children().first().text().trim() + " " + year
+    let date = moment(dateString, 'MMM D YYYY').toISOString();
 
     info['date'] = date;
     $(el).children('td').each((i, el) => {
@@ -30,15 +31,6 @@ function extractHolidaysFromHTML (html) {
     });
 
     holidays.push(info);
-    // let infoNodes = hnode.getElementsByTagName("td"); 
-
-    // console.log([date, infoNodes.innerText, infoNodes[2].innerText]);
-    // let closing = $(el).children('.views-field-field-vacancy-deadline').first().text().trim();
-    // let job = $(el).children('.views-field-title').first().text().trim();
-    // let location = $(el).children('.views-field-name').text().trim();
-    // closing = moment(closing.slice(0, closing.indexOf('-') - 1), 'DD/MM/YYYY').toISOString();
-
-    // holidays.push({date, job, location});
   });
 
   return holidays;
